@@ -1,0 +1,93 @@
+## 软件设计原则
+
+### 开闭原则
+> 定义：一个软件实体（如类，模块和函数）应该对扩展开放，对修改关闭
+
+开闭原则明确的告诉我们：软件实现应该对扩展开放，对修改关闭，其含义是说一个软件应该通过扩展来实现变化，而不是通过修改已有的代码来实现变化的
+
+一个软件产品只要在生命周期内，都会发生变化，即然变化是一个事实，我们就应该在设计时尽量适应这些变化，以提高项目的稳定性和灵活性，真正实现“拥抱变化”。开闭原则告诉我们应尽量通过扩展软件实体的行为来实现变化，而不是通过修改现有代码来完成变化，它是为软件实体的未来事件而制定的对现行开发设计进行约束的一个原则
+
+代码演示什么是开闭原则：
+以在线教育课程为例：定义一个销售的课程接口`ICourse`,该接口有一个方法`getPrice()`用于获取课程的价格，有一个课程类JavaCourse实现了课程接口。
+
+现在遇到节日，平台做优惠活动，现在课程打折销售，遇到这样一个场景，应该如何应对呢？
+
+可以想到有下面几种方式：
+1. 修改接口`ICourse`,我们最先想到的就是在ICourse接口中添加一个方法返回打折价格：getDiscountPrice()然后再类中实现这个方法，然后在获取价格的时候调用getDiscountPrice方法
+2. 修改实现类，直接在getPrice()方法中实现打折处理。此方法是有问题的，例如我们如果getPrice()方法中只需要读取书籍的打折前的价格呢？这不是有问题吗？当然我们也可以再增加getOffPrice()方法，这也是可以实现其需求，但是这就有二个读取价格的方法，因此，该方案也不是一个最优方案。
+3. 增加扩展，新建一个基于JavaCourse的子类JavaDiscountCourse，新增方法getDiscountPrice()和getOriginPrice()
+
+部分代码如下：
+```java
+public interface ICourse {
+	Integer getId();
+	String getName();
+	Double getPrice();
+}
+
+```
+实现类：
+```java
+public class JavaCourse implements ICourse{
+	private Integer id;
+	
+	private String name;
+	
+	private Double price;
+	
+	public JavaCourse(Integer id,String name,Double price) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+	}
+	public JavaCourse() {}
+	
+	
+	
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public Double getPrice() {
+		return price;
+	}
+	
+}
+```
+打折课程子类JavaDiscountCourse
+```java
+public class JavaDiscountCourse extends JavaCourse{
+
+	public JavaDiscountCourse(Integer id, String name, Double price) {
+		super(id, name, price);
+		
+	}
+
+	@Override
+	public Double getPrice() {
+		// 大于200就打折
+		if(super.getPrice() > 200) {
+			return super.getPrice()*0.8;
+		}
+		return super.getPrice();
+	}
+	
+	public Double getOriginPrice() {
+		return super.getPrice();
+	}
+
+}
+
+```
+
+
+
+
+
