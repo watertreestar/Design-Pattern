@@ -1,4 +1,4 @@
-## 软件设计原则
+## 软件设计原则-面向对象编程设计原则
 
 ### 开闭原则
 > 定义：一个软件实体（如类，模块和函数）应该对扩展开放，对修改关闭
@@ -86,6 +86,11 @@ public class JavaDiscountCourse extends JavaCourse{
 }
 
 ```
+
+
+
+
+
 
 
 
