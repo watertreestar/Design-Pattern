@@ -10,5 +10,4 @@ package com.ranger.design.principal.dependenceinvertion;
 public interface ICourse {
 	void studyCourse();
 
-	
 }
