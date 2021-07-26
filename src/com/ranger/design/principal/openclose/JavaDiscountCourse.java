@@ -1,11 +1,13 @@
 package com.ranger.design.principal;
 
+import com.ranger.design.principal.openclose.JavaCourse;
+
 /**
  * 
  * @author WaterTree
  *
  */
-public class JavaDiscountCourse extends JavaCourse{
+public class JavaDiscountCourse extends JavaCourse {
 
 	public JavaDiscountCourse(Integer id, String name, Double price) {
 		super(id, name, price);

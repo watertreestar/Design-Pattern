@@ -1,5 +1,7 @@
-package com.ranger.design.principal;
+package com.ranger.design.principal.openclose;
 
+
+import com.ranger.design.principal.openclose.ICourse;
 
 /**
  * 开闭原则:
@@ -14,7 +16,7 @@ package com.ranger.design.principal;
  * @author WaterTree
  *
  */
-public class JavaCourse implements ICourse{
+public class JavaCourse implements ICourse {
 	private Integer id;
 	
 	private String name;
